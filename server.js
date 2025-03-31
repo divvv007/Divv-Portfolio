@@ -3,17 +3,20 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;  // Use dynamic port for deployment
 
 app.use(cors());
-app.use(express.json()); // Middleware for JSON parsing
+app.use(express.json()); 
 
-// Connect to MongoDB (Make sure MongoDB is running)
-mongoose.connect("mongodb://localhost:27017/visitorDB")
-    .then(() => console.log("Connected to MongoDB"))
-    .catch(err => console.error("MongoDB connection error:", err));
+// ✅ Replace local MongoDB with MongoDB Atlas connection string
+mongoose.connect("mongodb+srv://<nagarvikas456>:<vjTtfl27OREUvuE8>@cluster0.mongodb.net/visitorDB?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log("Connected to MongoDB Atlas"))
+.catch(err => console.error("MongoDB connection error:", err));
 
-// Default Route (Fix for "Cannot GET /")
+// Default Route
 app.get("/", (req, res) => {
     res.send("Welcome to the Visitor Counter API!");
 });
@@ -45,4 +48,4 @@ app.get("/visitor-count", async (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
