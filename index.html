@@ -456,8 +456,8 @@
   });
 </script>
    <script>
-    fetch("my-portfolio-kuhi.vercel.app/visitor-count")
-    .then(response => response.json())
+    fetch("https://my-portfolio-kuhi.vercel.app/visitor-count")
+  .then(response => response.json())
       .then(data => {
         document.getElementById("visitor-count").innerText = `Visitors Count: ${data.count}`;
     })
