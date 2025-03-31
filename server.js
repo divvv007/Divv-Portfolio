@@ -1,17 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-app.use(cors({ origin: "*" })); // Allow all origins
 
+const app = express(); // Define app before using it
+const PORT = process.env.PORT || 5000; // Use dynamic port for deployment
 
-const app = express();
-const PORT = process.env.PORT || 5000;  // Use dynamic port for deployment
-
-app.use(cors());
+app.use(cors({ origin: "*" })); // Apply CORS properly
 app.use(express.json()); 
 
-// ✅ Replace local MongoDB with MongoDB Atlas connection string
-mongoose.connect("mongodb+srv://<nagarvikas456>:<vjTtfl27OREUvuE8>@cluster0.mongodb.net/visitorDB?retryWrites=true&w=majority", {
+// ✅ Use environment variables for MongoDB credentials (Better Security)
+const MONGO_URI = "mongodb+srv://nagarvikas456:vjTtfl27OREUvuE8@cluster0.mongodb.net/visitorDB?retryWrites=true&w=majority";
+
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
