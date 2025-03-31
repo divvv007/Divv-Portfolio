@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+app.use(cors({ origin: "*" })); // Allow all origins
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;  // Use dynamic port for deployment

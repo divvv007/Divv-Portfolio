@@ -215,7 +215,7 @@ body {
 }
 
 /* 📌 Card Body Fix */
-.card-body {
+.project-card  .card-body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
