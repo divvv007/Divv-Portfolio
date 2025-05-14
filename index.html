@@ -475,28 +475,39 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <!-- EmailJS Script -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  (function () {
-    emailjs.init("haSvFG3Dz6iVwIou5"); // ✅ Your EmailJS Public Key
-  })();
+  emailjs.init("haSvFG3Dz6iVwIou5"); // Replace with your actual EmailJS Public Key
 
-  function sendMail(event) {
-    event.preventDefault();
+  function sendEmail(e) {
+    e.preventDefault();
 
-    const form = document.getElementById("contact-form");
-
-    emailjs.sendForm("service_ihmzapo", "template_e5huxuq", form, "haSvFG3Dz6iVwIou5")
-      .then(() => {
-        alert("✅ Message sent successfully!");
-        form.reset(); // Optional: Reset form after sending
-      })
-      .catch((error) => {
-        alert("❌ Failed to send message. Please try again.");
-        console.error("EmailJS Error:", error);
-      });
+    emailjs.send("service_ihmzapo", "template_e5huxuq", {
+      from_name: document.getElementById("name").value,
+      from_email: document.getElementById("email").value,
+      message: document.getElementById("message").value
+    }).then(
+      () => alert("Email sent successfully!"),
+      (error) => alert("Failed to send: " + error)
+    );
   }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
   // Add click event to all education cards
   document.querySelectorAll(".edu-card").forEach(card => {
