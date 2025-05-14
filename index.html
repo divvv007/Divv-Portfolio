@@ -471,29 +471,34 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
    <script src="script.js "></script>
 
-    <!-- Add EmailJS CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-<!-- EmailJS Script -->
+  <!-- EmailJS Script -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  emailjs.init("haSvFG3Dz6iVwIou5"); // Replace with your actual EmailJS Public Key
+  // Initialize EmailJS with your actual public key
+  emailjs.init("template_e5huxuq"); // ⬅️ Replace with your EmailJS Public Key
 
-  function sendEmail(e) {
+  function sendMail(e) {
     e.preventDefault();
 
-    emailjs.send("service_ihmzapo", "template_e5huxuq", {
-      from_name: document.getElementById("name").value,
-      from_email: document.getElementById("email").value,
+    const params = {
+      name: document.getElementById("name").value,
+      number: document.getElementById("number").value,
+      email: document.getElementById("email").value,
       message: document.getElementById("message").value
-    }).then(
-      () => alert("Email sent successfully!"),
-      (error) => alert("Failed to send: " + error)
-    );
+    };
+
+    // Replace with your EmailJS service ID and template ID
+    emailjs.send("service_ihmzapo", "template_e5huxuq", params)
+      .then(() => {
+        alert("✅ Message sent successfully!");
+        document.getElementById("contact-form").reset();
+      })
+      .catch((error) => {
+        console.error("❌ Email send failed:", error);
+        alert("❌ Failed to send message. Please try again.");
+      });
   }
 </script>
-
-
 
 
 
